@@ -1,1 +1,59 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090d18"><title>NightNode • Hosting Panel</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="ambient"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brandmark">N</span><span>NIGHTNODE<small>HOSTING CONTROL</small></span></a>
+      <div class="topright"><span class="live-dot"></span><span id="connectionText">Checking connection</span><button id="logoutBtn" class="btn btn-ghost hidden">Log out</button></div>
+    </header>
+    <section id="loginView" class="login-layout">
+      <div class="hero-copy"><div class="eyebrow"><span class="pulse"></span> YOUR PRIVATE CLOUD CONSOLE</div>
+        <h1>Deploy ideas.<br><span>Run without limits.</span></h1>
+        <p>A clean control center for your Python, Node.js, PHP and Java projects. Manage deployments from one place.</p>
+        <div class="feature-line"><span>⌁</span> Multi-runtime workspace <i></i><span>⌘</span> Admin-only access</div>
+      </div>
+      <form id="loginForm" class="glass login-card">
+        <div class="card-icon">↗</div><h2>Welcome back</h2><p class="muted">Sign in to your admin console</p>
+        <label>Admin username<input name="username" autocomplete="username" placeholder="admin" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required></label>
+        <button class="btn btn-primary full" type="submit">Secure sign in <span>→</span></button>
+        <p id="loginError" class="error" role="alert"></p><div class="secure-note">▣ &nbsp; Protected admin session</div>
+      </form>
+    </section>
+    <section id="dashboardView" class="hidden">
+      <div class="page-heading"><div><div class="eyebrow">OVERVIEW / CONTROL CENTER</div><h1>Server <span>overview</span></h1><p class="muted">Your projects, runtimes and deployments at a glance.</p></div><button id="refreshBtn" class="btn btn-outline">↻ &nbsp; Refresh data</button></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-top"><span>Stored projects</span><span class="stat-icon">▤</span></div><strong id="projectCount">0</strong><small>Uploaded to persistent volume</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Runtime support</span><span class="stat-icon purple">⌘</span></div><strong>04</strong><small>Python · Node · PHP · Java</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Railway API</span><span class="stat-icon green">⌁</span></div><strong id="railwayState">Checking</strong><small id="railwayHint">API connection status</small></article>
+      </div>
+      <div class="content-grid">
+        <section class="panel upload-panel"><div class="panel-heading"><div><h2>Upload project</h2><p class="muted">Upload a ZIP archive for storage</p></div><span class="pill">ZIP ONLY</span></div>
+          <form id="uploadForm">
+            <label>Project name<input name="name" placeholder="my-python-bot" maxlength="40" required></label>
+            <label>Runtime<select name="language"><option value="auto">Auto detect later</option><option value="python">Python</option><option value="node">Node.js</option><option value="php">PHP</option><option value="java">Java</option></select></label>
+            <label class="dropzone" for="projectFile"><span class="upload-symbol">↑</span><strong>Choose a project ZIP</strong><small>Maximum <span id="maxUpload">10</span> MB · Keep secrets out of archives</small><input id="projectFile" type="file" name="project" accept=".zip,application/zip" required></label>
+            <button class="btn btn-primary full" type="submit">Upload project <span>↑</span></button><p id="uploadMessage" class="muted status-message"></p>
+          </form>
+        </section>
+        <section class="panel"><div class="panel-heading"><div><h2>Runtime catalog</h2><p class="muted">Supported project types</p></div><span class="pill pill-green">4 LANGUAGES</span></div>
+          <div class="runtime-list"><div class="runtime"><span class="runtime-icon py">Py</span><div><strong>Python</strong><small>requirements.txt / main.py</small></div><span class="runtime-status">Ready</span></div>
+          <div class="runtime"><span class="runtime-icon js">JS</span><div><strong>Node.js</strong><small>package.json / index.js</small></div><span class="runtime-status">Ready</span></div>
+          <div class="runtime"><span class="runtime-icon php">php</span><div><strong>PHP</strong><small>composer.json / index.php</small></div><span class="runtime-status">Ready</span></div>
+          <div class="runtime"><span class="runtime-icon java">J</span><div><strong>Java</strong><small>Maven / Gradle project</small></div><span class="runtime-status">Ready</span></div></div>
+          <div class="notice"><strong>ⓘ Runtime note</strong><p>Uploads are stored securely; this starter does not execute arbitrary uploads in the panel. Each project needs an isolated Railway service and a runtime-specific build.</p></div>
+        </section>
+      </div>
+      <section class="panel projects-panel"><div class="panel-heading"><div><h2>Your projects</h2><p class="muted">Uploaded archives on the persistent volume</p></div><span class="pill" id="projectBadge">0 PROJECTS</span></div><div id="projectList" class="project-list"><div class="empty">No projects uploaded yet.</div></div></section>
+      <section class="panel railway-panel"><div class="panel-heading"><div><h2>Railway connection</h2><p class="muted">Service inventory from your Railway project</p></div><button id="servicesBtn" class="btn btn-outline btn-small">Load services</button></div><div id="serviceList" class="empty">Connect a Railway API token and project ID in environment variables.</div></section>
+      <footer> NIGHTNODE <span>•</span> Private admin workspace <span class="footer-right">Secure by configuration, not by appearance.</span></footer>
+    </section>
+  </main>
+  <script src="/app.js" defer></script>
+</body></html>
